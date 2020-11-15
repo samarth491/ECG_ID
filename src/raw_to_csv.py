@@ -1,7 +1,7 @@
 """
 This script is used to convert raw physionet data to csv format. This will
 help to ease the processing and fast loading of data.
-First we define the directory and path to the raw data. Then the script reads
+First we import the directory and path to the raw data. Then the script reads
 names of all records. These records are then read using wfdb and are converted
 to csv format using `to_csv` function. For more information on how this
 function works, please look into function description.
@@ -14,16 +14,7 @@ import wfdb as wf
 import numpy as np
 import pandas as pd
 
-# insert the name of the directory where raw data resides here
-DIR = "/home/samarth/Documents/BTP/ECG_Data"
-
-# insert the database name here
-RAW_DATA = "nsrdb"
-CSV_DATA = "nsrdb_csv"
-
-RAW_PATH = DIR + "/" + RAW_DATA
-CSV_PATH = DIR + "/" + CSV_DATA
-
+import CONSTANTS as const
 
 """
     Reads the records of a patient using wfdb - native Python 
@@ -39,12 +30,12 @@ CSV_PATH = DIR + "/" + CSV_DATA
 """
 
 def to_csv(file):
-    dataset = RAW_PATH + "/" + file
-    dataset_csv = CSV_PATH + "/" + file + ".csv"
+    dataset = const.RAW_PATH + file
+    dataset_csv = const.CSV_PATH + file + ".csv"
     
     # make the folder to store csv files if it does not already exist
-    if not os.path.exists(CSV_PATH):
-        os.mkdir(CSV_PATH)
+    if not os.path.exists(const.CSV_PATH):
+        os.mkdir(const.CSV_PATH)
         
     record = wf.rdrecord(dataset)
     readings = record.__dict__['p_signal']
@@ -78,10 +69,10 @@ def to_csv(file):
 Driver function used to convert raw data to csv format
 """
 
-def main(): 
+def raw_to_csv(): 
     # `files` contains names of all patients records
     files = [file[:-4] 
-             for file in os.listdir(RAW_PATH) 
+             for file in os.listdir(const.RAW_PATH) 
              if file.endswith('.dat')]
     
     for file in files:
@@ -89,4 +80,4 @@ def main():
     
 
 if __name__ == "__main__":
-    main()
+    raw_to_csv()
