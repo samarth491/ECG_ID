@@ -223,9 +223,7 @@ params: None
 return: list of denoised signals
 """
 
-def denoise():
-    datasets = load_data.load_data()
-    
+def denoise(datasets):
     denoised = []
 
     for dataset in datasets:
