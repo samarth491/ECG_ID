@@ -12,8 +12,6 @@ import copy
 import numpy as np
 import pywt
 
-import load_data
-
 
 """
 This function is used to calculate energy of each level of DWT.
