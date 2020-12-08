@@ -23,6 +23,7 @@ def load_data():
     filenames = [file for file in os.listdir(const.CSV_PATH)]
     datasets = []
     freqs = []
+    ids = []
 
     for filename in filenames:
         dataset = np.genfromtxt(const.CSV_PATH+filename, 
@@ -33,5 +34,7 @@ def load_data():
         record = wf.rdrecord(const.RAW_PATH+filename[:-4])
         freqs.append(record.__dict__['fs'])
 
+        ids.append(filename[:-4])
+
     
-    return [freqs, datasets]
+    return [freqs, datasets, ids]
