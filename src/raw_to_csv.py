@@ -47,19 +47,12 @@ def to_csv(file):
     freq = record.__dict__['fs']
     samples = 7200*freq
     
-    time_stamp = np.zeros((samples,1))
-    ecg_lead_1 = np.zeros((samples,1))
-    ecg_lead_2 = np.zeros((samples,1))
     data = np.zeros((samples,3))
     
     for i in range(0, samples):
-        time_stamp[i][0] = (i/freq)
-        ecg_lead_1[i][0] = readings[i][0]
-        ecg_lead_2[i][0] = readings[i][1]
-        
-        data[i][0] = time_stamp[i][0]
-        data[i][1] = ecg_lead_1[i][0]
-        data[i][2] = ecg_lead_2[i][0]
+        data[i][0] = (i/freq)
+        data[i][1] = readings[i][0]
+        data[i][2] = readings[i][1]
         
     pd.DataFrame(data).to_csv(dataset_csv, 
                               header=['timestamp', 'lead1', 'lead2'], 
