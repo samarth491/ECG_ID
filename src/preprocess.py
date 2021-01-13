@@ -23,7 +23,8 @@ return:
 
 def segment(signal, peaks, slide=True):
     n = len(peaks)
-    one_seg = 8 # no. of heartbeats in one segment
+    N = len(signal)
+    one_seg = 2 # no. of heartbeats in one segment
     sample_window = 128 # no. of samples before and after the peaks
 
     frames = []
@@ -33,7 +34,7 @@ def segment(signal, peaks, slide=True):
             l = peaks[i]
             r = peaks[i + one_seg - 1]
             l = max(l - sample_window, 0)
-            r = min(r + sample_window, n-1)
+            r = min(r + sample_window, N - 1)
             frames.append(signal[l: r + 1])
     else:
         for i in range(0, n, one_seg):
@@ -42,8 +43,6 @@ def segment(signal, peaks, slide=True):
 
             l = peaks[i]
             r = peaks[i + one_seg - 1]
-            l = max(l - sample_window, 0)
-            r = min(r + sample_window, n-1)
             frames.append(signal[l: r + 1])
 
     return frames
