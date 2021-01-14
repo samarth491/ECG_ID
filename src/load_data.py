@@ -21,12 +21,19 @@ return: list of datasets
 
 def load_data():
     const.find_paths()
+
+    print("============================= Paths Allocated =============================")
+
     filenames = [file for file in os.listdir(const.CSV_PATH)]
     datasets = []
     freqs = []
     ids = []
 
+    idx = 1
     for filename in filenames:
+        print("Loading data for patient", idx, end = '\r')
+        idx += 1
+
         dataset = np.genfromtxt(const.CSV_PATH+filename, 
                                 delimiter=",", names=["time","lead1","lead2"], 
                                 skip_header=1)

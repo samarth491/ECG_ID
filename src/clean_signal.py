@@ -44,11 +44,17 @@ return:
 
 def clean_signal(freqs, datasets):
     denoised_signals = denoise.denoise(datasets)
+
+    print("======================= High Frequency Noise Removed ======================")
+
+
     clean_signals = []
 
     for idx in range(0, len(denoised_signals)):
         signal = denoised_signals[idx]
         fs = freqs[idx]
+
+        print("Removing low frequency noise from patient", idx + 1, "data", end = '\r')
 
         clean_signals.append(remove_baseline_wander(signal, fs))
 

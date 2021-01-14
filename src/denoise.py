@@ -224,7 +224,11 @@ return: list of denoised signals
 def denoise(datasets):
     denoised = []
 
+    idx = 1
     for dataset in datasets:
+        print("Removing high frequency noise from patient", idx, "data", end = '\r')
+        idx += 1
+
         signal = dataset["lead1"]
 
         s_avg = np.mean(signal, dtype=np.float64)

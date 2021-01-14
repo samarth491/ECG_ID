@@ -57,17 +57,24 @@ return:
 
 def preprocess():
     data = load_data.load_data()
+
+    print("============================= Database loaded =============================")
+
     freqs = data[0]
     raw_signals = data[1]
     ids = data[2]
 
     signals = clean_signal.clean_signal(freqs, raw_signals)
 
+    print("============================== Noises Removed =============================")
+
     preprocessed_data = {}
 
     for idx in range(0, len(signals)):
         signal = signals[idx]
         freq = freqs[idx]
+
+        print("Detecting peaks in patient", idx + 1, "data", end = '\r')
 
         peaks = peak_detection.detect_peaks(signal, freq)
 

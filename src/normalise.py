@@ -61,12 +61,20 @@ def create_df(data, normalised_size):
     df = pd.DataFrame(columns = [i for i in range(normalised_size + 1)])
 
     ptr = 0
+    idx = 1
     for patient in data:
+        print("Creating DataFrame for patient", idx, end = '\r')
+
         for ind in range(len(data[patient])):
             data[patient][ind] = normalise(data[patient][ind], normalised_size)
             df.loc[ptr] = data[patient][ind].tolist() + [patient]
             ptr += 1
-                
+
+            done = ((ind + 1) / len(data[patient])) * 100.0
+            print("Creating DataFrame for patient", idx, "%6.2f %% done" %(done), end = '\r')
+        
+        idx += 1
+
     return df     
 
 
@@ -79,6 +87,9 @@ return:
 
 def get_normalised_data():
     data = preprocess.preprocess()
+
+    print("========================= Preprocessing Completed =========================")
+
     normalised_size = find_size(data)
 
     return create_df(data, normalised_size)

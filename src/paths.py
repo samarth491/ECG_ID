@@ -11,6 +11,9 @@ RAW_PATH = ""
 
 
 def find_paths():
+    print("")
+    print("Allocating paths", end = '\r')
+
     # directory where file recides
     pwd = os.path.dirname(os.path.abspath(__file__))
     
