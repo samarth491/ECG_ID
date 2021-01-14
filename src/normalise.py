@@ -80,9 +80,8 @@ def create_df(data, normalised_size):
 
 """
 This is the driver function that collects the preprocessed data,
-finds its normalised size and then returns the created dataframe.
-return:
-    created dataframe
+finds its normalised size and then returns the created dataframe in
+the form of a file.
 """
 
 def get_normalised_data():
@@ -92,4 +91,10 @@ def get_normalised_data():
 
     normalised_size = find_size(data)
 
-    return create_df(data, normalised_size)
+    df = create_df(data, normalised_size)
+    df.to_csv('../normalised_data.csv', encoding = 'utf-8', index = False)
+
+    print("========================= Normalization Completed =========================")
+
+if __name__ == "__main__":
+    get_normalised_data()
