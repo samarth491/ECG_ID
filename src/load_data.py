@@ -11,7 +11,7 @@ import os
 import numpy as np
 import wfdb as wf
 
-import CONSTANTS as const
+import paths as const
 
 """
 This is the driver function that helps to load the data.
@@ -20,6 +20,7 @@ return: list of datasets
 """
 
 def load_data():
+    const.find_paths()
     filenames = [file for file in os.listdir(const.CSV_PATH)]
     datasets = []
     freqs = []

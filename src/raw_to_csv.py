@@ -14,7 +14,7 @@ import wfdb as wf
 import numpy as np
 import pandas as pd
 
-import CONSTANTS as const
+import paths as const
 
 """
     Reads the records of a patient using wfdb - native Python 
@@ -63,7 +63,8 @@ def to_csv(file):
 Driver function used to convert raw data to csv format
 """
 
-def raw_to_csv(): 
+def raw_to_csv():
+    const.find_paths() 
     # `files` contains names of all patients records
     files = [file[:-4] 
              for file in os.listdir(const.RAW_PATH) 
